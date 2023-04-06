@@ -150,7 +150,7 @@ class Student:
         update_button=Button(button_frame,text="Update",width=16,command=self.update_data, font=("Comic Sans MS", 11, "bold"), bg= "grey")
         update_button.grid(row=0, column=1)
 
-        delete_button=Button(button_frame,text="Delete", width=15,font=("Comic Sans MS", 11, "bold"), bg= "grey")
+        delete_button=Button(button_frame,text="Delete",command=self.delete_data, width=15,font=("Comic Sans MS", 11, "bold"), bg= "grey")
         delete_button.grid(row=0, column=2)
 
         reset_button=Button(button_frame,text="Reset", width = 15,font=("Comic Sans MS", 11, "bold"), bg= "grey")
@@ -175,6 +175,8 @@ class Student:
         Right_frame.place(x=700, y =20, width=550, height=575)
 
 
+
+
         ######Search System######
         Search_frame = LabelFrame(Right_frame,bg="white",relief=RIDGE, text="Search System", font=("Comic Sans MS", 11, "bold"))
         Search_frame.place(x=0, y =150, width=540, height=80)
@@ -195,6 +197,8 @@ class Student:
 
         ShowAll_button=Button(Search_frame,text="Show All",font=("Comic Sans MS", 11, "bold"), bg= "grey")
         ShowAll_button.grid(row=0, column=4)
+
+
 
         #########Table Frame################
         table_frame = LabelFrame(Right_frame,bg="white",relief=RIDGE, font=("Comic Sans MS", 11, "bold"))
@@ -240,7 +244,7 @@ class Student:
         self.student_table.bind("<ButtonRelease>",self.get_cursor)
         self.fetch_data()
 
-        #function declaration
+        #############################add data##############################
     def add_data(self):
         if self.var_dep.get()=="Select Department" or self.var_name.get()=="" or self.var_id.get()=="":
             messagebox.showerror("Error","All fields are required",parent=self.root)
@@ -272,6 +276,8 @@ class Student:
                 messagebox.showerror("Error",f"Due to {str(es)}",parent=self.root)
 
 
+
+
     ###################fetching data from database##########################
     def fetch_data(self):
         conn=mysql.connector.connect(host="localhost", username = "root", password = "HELLOPUSPA@123", database = "Face_Recognition")
@@ -285,7 +291,9 @@ class Student:
                 self.student_table.insert("",END,values=i)
             conn.commit()
         conn.close()
-    #######################get cursor#############
+
+
+    #######################get cursor#####################################
     def get_cursor(self,event=""):
         cursor_focus=self.student_table.focus()
         content=self.student_table.item(cursor_focus)
@@ -304,7 +312,9 @@ class Student:
         self.var_gender.set(data[10]),
         self.var_radio1.set(data[11])
 
-    #update function
+
+
+    #############################update###################################
     def update_data(self):
         if self.var_dep.get()=="Select Department" or self.var_name.get()=="" or self.var_id.get()=="":
             messagebox.showerror("Error","All fields are required",parent=self.root) 
@@ -329,6 +339,34 @@ class Student:
 
             except Exception as es:
                 messagebox.showerror("Error",f"Due to {str(es)}",parent=self.root)
+
+
+    
+    ###############################delete#########################################
+    def delete_data(self):
+        if self.var_id.get()=="":
+            messagebox.showerror("Error","Student ID must be required!",parent=self.root)
+        else:
+            try:
+                delete=messagebox.askyesno("Delete Student","Do you want to delete this student?",parent=self.root)
+                if delete>0:
+                    conn=mysql.connector.connect(host="localhost", username = "root", password = "HELLOPUSPA@123", database = "Face_Recognition")
+                    my_cursor=conn.cursor()
+                    sql="delete from student where Student_ID=%s"
+                    val=(self.var_id.get(),)
+                    my_cursor.execute(sql,val)
+                else:
+                    if not delete:
+                        return
+                conn.commit()
+                self.fetch_data()
+                conn.close()
+                messagebox.showinfo("Delete", "Successfully deleted student details",parent=self.root)
+            
+            except Exception as es:
+                messagebox.showerror("Error",f"Due to {str(es)}",parent=self.root)
+                
+
         
 
 
