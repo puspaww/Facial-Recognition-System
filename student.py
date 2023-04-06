@@ -153,7 +153,7 @@ class Student:
         delete_button=Button(button_frame,text="Delete",command=self.delete_data, width=15,font=("Comic Sans MS", 11, "bold"), bg= "grey")
         delete_button.grid(row=0, column=2)
 
-        reset_button=Button(button_frame,text="Reset", width = 15,font=("Comic Sans MS", 11, "bold"), bg= "grey")
+        reset_button=Button(button_frame,text="Reset",command=self.reset_data, width = 15,font=("Comic Sans MS", 11, "bold"), bg= "grey")
         reset_button.grid(row=0, column=3)
 
         button_frame1 = Frame(Leftbottom_frame, bd=2, relief=RIDGE, bg="white")
@@ -365,16 +365,22 @@ class Student:
             
             except Exception as es:
                 messagebox.showerror("Error",f"Due to {str(es)}",parent=self.root)
-                
-
-        
-
-
-
-
-        
-
-
+            
+    
+    ########################reset###########################
+    def reset_data(self):
+        self.var_dep.set("Select Department")
+        self.var_year.set("Select Year")
+        self.var_sem.set("Select Semester")
+        self.var_course.set("")
+        self.var_id.set("")
+        self.var_name.set("")
+        self.var_dob.set("")
+        self.var_address.set("")
+        self.var_phone.set("")
+        self.var_email.set("")
+        self.var_gender.set("")
+        self.var_radio1.set("")
 
         
 
