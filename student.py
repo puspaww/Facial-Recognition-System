@@ -147,7 +147,7 @@ class Student:
         save_button=Button(button_frame,text="Save",command=self.add_data, width=15,font=("Comic Sans MS", 11, "bold"), bg= "grey")
         save_button.grid(row=0, column=0)
 
-        update_button=Button(button_frame,text="Update",width=16, font=("Comic Sans MS", 11, "bold"), bg= "grey")
+        update_button=Button(button_frame,text="Update",width=16,command=self.update_data, font=("Comic Sans MS", 11, "bold"), bg= "grey")
         update_button.grid(row=0, column=1)
 
         delete_button=Button(button_frame,text="Delete", width=15,font=("Comic Sans MS", 11, "bold"), bg= "grey")
@@ -220,7 +220,7 @@ class Student:
         self.student_table.heading("Address", text="Address")
         self.student_table.heading("Phone", text="Phone")
         self.student_table.heading("Gender", text="Gender")
-        self.student_table.heading("Photo_Sample",text="PhotoSampleStatus")
+        self.student_table.heading("Photo_Sample",text="Photo_Sample")
         self.student_table["show"]="headings"
 
         self.student_table.column("Department",width=100)
@@ -234,7 +234,7 @@ class Student:
         self.student_table.column("Address",width=100)
         self.student_table.column("Phone", width=100)
         self.student_table.column("Gender",width=100)
-        self.student_table.column("Photo_Sample",width=150)
+        self.student_table.column("Photo_Sample",width=100)
 
         self.student_table.pack(fill=BOTH, expand=1)
         self.student_table.bind("<ButtonRelease>",self.get_cursor)
@@ -285,7 +285,7 @@ class Student:
                 self.student_table.insert("",END,values=i)
             conn.commit()
         conn.close()
-    #######################3get cursor#############
+    #######################get cursor#############
     def get_cursor(self,event=""):
         cursor_focus=self.student_table.focus()
         content=self.student_table.item(cursor_focus)
@@ -312,10 +312,11 @@ class Student:
             try:
                 Upadate = messagebox.askyesno("Update","Do you want to update the student details?",parent=self.root)
                 if Upadate>0:
+
                     conn=mysql.connector.connect(host="localhost", username = "root", password = "HELLOPUSPA@123", database = "Face_Recognition")
                     my_cursor=conn.cursor()
                     my_cursor.execute("update student set Department=%s, Year=%s, Semester=%s, Course=%s, Name=%s, DOB=%s,Email=%s,Address=%s,Phone=%s,Gender=%s, Photo_Sample=%s where Student_ID=%s",(self.var_dep.get(),self.var_year.get(),self.var_sem.get(),self.var_course.get(),self.var_name.get(),self.var_dob.get(),self.var_email.get(),self.var_address.get(),self.var_phone.get(),self.var_gender.get(),self.var_radio1.get(),self.var_id.get()))
-                                                                                                                                                                                                            
+                                                                                                                                                                                                          
                                                                                                                                                                                  
 
                 else:
