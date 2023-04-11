@@ -3,6 +3,7 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 from tkinter import messagebox
 import mysql.connector
+import cv2
 
 class Student:
     def __init__(self, root):
@@ -24,7 +25,7 @@ class Student:
         self.var_gender=StringVar()
 
 
-        img = Image.open(r"C:\Users\User\Documents\Facial Recognition System\images\background.jpg")
+        img = Image.open(r"images\background.jpg")
         img = img.resize((1366,768), Image.LANCZOS)
         self.photoimg=ImageTk.PhotoImage(img) 
 
@@ -159,7 +160,7 @@ class Student:
         button_frame1 = Frame(Leftbottom_frame, bd=2, relief=RIDGE, bg="white")
         button_frame1.place(x=0, y=280, width=590, height=40)
 
-        take_sample_button=Button(button_frame1,text="Take Photo Sample",width=31,font=("Comic Sans MS", 11, "bold"), bg= "grey")
+        take_sample_button=Button(button_frame1,command=self.generate_dataset,text="Take Photo Sample",width=31,font=("Comic Sans MS", 11, "bold"), bg= "grey")
         take_sample_button.grid(row=0, column=0)
 
         Update_sample_button=Button(button_frame1,text="Update Photo Sample",width=32,font=("Comic Sans MS", 11, "bold"), bg= "grey")
@@ -381,6 +382,66 @@ class Student:
         self.var_email.set("")
         self.var_gender.set("")
         self.var_radio1.set("")
+
+
+
+
+
+    # Generate Data sets or take photo samples
+    def generate_dataset(self):
+        if self.var_dep.get()=="Select Department" or self.var_name.get()=="" or self.var_id.get()=="":
+            messagebox.showerror("Error","All fields are required",parent=self.root) 
+        else:
+            try:  
+                conn=mysql.connector.connect(host="localhost", username = "root", password = "HELLOPUSPA@123", database = "Face_Recognition")
+                my_cursor=conn.cursor()
+                my_cursor.execute("select * from student")
+                myresult = my_cursor.fetchall()
+                id=0
+                for x in myresult:
+                    id+=1
+                my_cursor.execute("update student set Department=%s, Year=%s, Semester=%s, Course=%s, Name=%s, DOB=%s,Email=%s,Address=%s,Phone=%s,Gender=%s, Photo_Sample=%s where Student_ID=%s",(self.var_dep.get(),self.var_year.get(),self.var_sem.get(),self.var_course.get(),self.var_name.get(),self.var_dob.get(),self.var_email.get(),self.var_address.get(),self.var_phone.get(),self.var_gender.get(),self.var_radio1.get(),self.var_id.get()==id+1))                                                                                                                                                          
+                conn.commit()
+                self.fetch_data()
+                self.reset_data()
+                conn.close()
+
+                #load predefined data on frontal face opencv
+                face_classifier=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+
+                def face_cropped(img):
+                    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                    face = face_classifier.detectMultiScale(gray, 1.3,5)
+                    #scaling factor = 1.3
+                    #minimum neighbour = 5
+
+                    for (x,y,w,h) in face:
+                        face_cropped = img[y:y+h,x:x+w]
+                        return face_cropped
+                    
+                cap = cv2.VideoCapture(0)
+                img_id=0
+                while True:
+                    ret,my_frame=cap.read()
+                    if face_cropped(my_frame) is not None:
+                        img_id+=1
+                        face = cv2.resize(face_cropped(my_frame), (450,450))
+                        face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
+
+                        file_name_path="data/"+"user"+"."+str(id)+"."+str(img_id)+".jpg"
+                        #file_name_path="data/user."+str(id)+"."+str(img_id)+".jpg"
+                        cv2.imwrite(file_name_path,face)
+                        cv2.putText(face, str(img_id),(50,50), cv2.FONT_HERSHEY_COMPLEX, 2, (0,255,0), 2)
+                        cv2.imshow("Cropped face", face)
+
+                    if cv2.waitKey(1)==13 or int(img_id)==100:
+                        break
+                cap.release()
+                cv2.destroyAllWindows()
+
+                messagebox.showinfo("Result", "Generating Data sets completed!", parent =self.root)
+            except Exception as es:
+                messagebox.showerror("Error",f"Due to {str(es)}",parent=self.root)    
 
         
 
