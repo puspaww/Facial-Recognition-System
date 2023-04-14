@@ -73,8 +73,7 @@ class Face_Recognition_System:
         b4_1.place(x=1000, y=450, width=200, height=40)
 
         # train data
-        b1_1 = Button(self.root, text="Train Data", command=self.train_data, cursor="hand2", font=(
-            "Comic Sans MS", 16, "bold"), bg="black", fg="white")
+        b1_1 = Button(self.root, text="Train Data", command=self.train_data, cursor="hand2", font=("Comic Sans MS", 16, "bold"), bg="black", fg="white")
         b1_1.place(x=550, y=550, width=200, height=40)
 
     def student_details(self):

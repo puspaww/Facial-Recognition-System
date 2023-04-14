@@ -20,8 +20,7 @@ class Train:
         title_lbl.place(x=0, y=0, width=1366, height=40)
 
         # button
-        b1_1 = Button(self.root, text="Train Data", command=self.train_classifier,
-                      cursor="hand2", font=("Comic Sans MS", 16, "bold"), bg="black", fg="white")
+        b1_1 = Button(self.root, text="Train Data", command=self.train_classifier,cursor="hand2", font=("Comic Sans MS", 16, "bold"), bg="black", fg="white")
         b1_1.place(x=600, y=300, width=200, height=40)
 
     def train_classifier(data_dir):
