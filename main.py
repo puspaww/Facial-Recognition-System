@@ -2,6 +2,8 @@ from tkinter import*
 from tkinter import ttk
 from PIL import Image, ImageTk
 from student import Student
+from train import Train
+
 
 class Face_Recognition_System:
     def __init__(self, root):
@@ -64,9 +66,18 @@ class Face_Recognition_System:
         b4_1 = Button(bg_img, text="Exit",cursor="hand2",font=("Comic Sans MS",16, "bold"),bg="black",fg="white")
         b4_1.place(x=1000, y=450, width=200, height=40)
 
+        #train data
+        b1_1 = Button(self.root, text="Train Data", command=self.train_data, cursor="hand2",font=("Comic Sans MS",16, "bold"),bg="black",fg="white")
+        b1_1.place(x=600, y=600, width=200, height=40)
+
+
     def student_details(self):
         self.new_window=Toplevel(self.root)
         self.app = Student(self.new_window)
+
+    def train_data(self):
+        self.new_window=Toplevel(self.root)
+        self.app = Train(self.new_window)
 
         
 if __name__=="__main__":
