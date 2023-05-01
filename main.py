@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+import tkinter
 from PIL import Image, ImageTk
 from student import Student
 from train import Train
@@ -69,10 +70,11 @@ class Face_Recognition_System:
         img4 = img4.resize((200, 200), Image.LANCZOS)
         self.photoimg4 = ImageTk.PhotoImage(img4)
 
-        b4 = Button(bg_img, image=self.photoimg4, cursor="hand2")
+        b4 = Button(bg_img, image=self.photoimg4,
+                    command=self.exit, cursor="hand2")
         b4.place(x=1000, y=250, width=200, height=200)
 
-        b4_1 = Button(bg_img, text="Exit", cursor="hand2", font=(
+        b4_1 = Button(bg_img, text="Exit", command=self.exit, cursor="hand2", font=(
             "Comic Sans MS", 16, "bold"), bg="black", fg="white")
         b4_1.place(x=1000, y=450, width=200, height=40)
 
@@ -96,6 +98,14 @@ class Face_Recognition_System:
     def attendance_data(self):
         self.new_window = Toplevel(self.root)
         self.app = Attendance(self.new_window)
+
+    def exit(self):
+        self.exit = tkinter.messagebox.askyesno(
+            "Face recognition", "Are you sure you want to exit?", parent=self.root)
+        if self.exit > 0:
+            self.root.destroy()
+        else:
+            return
 
 
 if __name__ == "__main__":
