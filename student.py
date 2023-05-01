@@ -13,7 +13,6 @@ class Student:
         self.root.wm_iconbitmap("images\\icons\\student_details.ico")
         self.root.title("Student Details")
 
-
         ######## VARIABLES###########
         self.var_dep = StringVar()
         self.var_year = StringVar()

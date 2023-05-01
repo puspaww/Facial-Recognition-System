@@ -14,7 +14,6 @@ class Face_Recognition_System:
         self.root.geometry("1366x768+0+0")
         self.root.wm_iconbitmap("images\\icons\\main.ico")
         self.root.title("Face Recognition System")
-        
 
         # bg image
         img = Image.open(r"images\background.jpg")
