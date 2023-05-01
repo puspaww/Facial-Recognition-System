@@ -151,7 +151,7 @@ class Register:
         else:
             conn = mysql.connector.connect(
                 # host="localhost", user="root", password="Legion@123", database="codewithme")
-                host="localhost", user="root", password="HELLOPUSPA@123", database="Login_&_Register")
+                host="localhost", user="root", password="HELLOPUSPA@123", database="login_&_register")
             my_cursor = conn.cursor()
             query = ("select * from register where email=%s")
             value = (self.var_email.get(),)
