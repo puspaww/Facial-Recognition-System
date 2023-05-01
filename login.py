@@ -23,7 +23,7 @@ class login_window:
         self.root.title("Login")
         self.root.geometry("1530x790+0+0")
 
-        self.bg = ImageTk.PhotoImage(file=r"photos\images.png")
+        self.bg = ImageTk.PhotoImage(file=r"images\photos\images.png")
 
         lbl_bg = Label(self.root, image=self.bg)
         lbl_bg.place(x=0, y=0, relwidth=1, relheight=1)
@@ -31,7 +31,8 @@ class login_window:
         frame = Frame(self.root, bg="black")
         frame.place(x=510, y=170, width=340, height=450)
 
-        img1 = Image.open(r"photos\972105c5a775f38cf33d3924aea053f1.jpg")
+        img1 = Image.open(
+            r"images\photos\972105c5a775f38cf33d3924aea053f1.jpg")
         img1 = img1.resize((100, 100), Image.LANCZOS)
         self.photo_image1 = ImageTk.PhotoImage(img1)
         lblimg1 = Label(image=self.photo_image1, bg="black", borderwidth=0)
@@ -57,13 +58,14 @@ class login_window:
         self.txtpass.place(x=40, y=270, width=270)
 
         # =======Icon images=================================
-        img2 = Image.open(r"photos\972105c5a775f38cf33d3924aea053f1.jpg")
+        img2 = Image.open(
+            r"images\photos\972105c5a775f38cf33d3924aea053f1.jpg")
         img2 = img2.resize((25, 25), Image.LANCZOS)
         self.photo_image2 = ImageTk.PhotoImage(img2)
         lblimg2 = Label(image=self.photo_image2, bg="black", borderwidth=0)
         lblimg2.place(x=550, y=330, width=25, height=25)
 
-        img3 = Image.open(r"photos\download.png")
+        img3 = Image.open(r"images\photos\download.png")
         img3 = img3.resize((25, 25), Image.LANCZOS)
         self.photo_image3 = ImageTk.PhotoImage(img3)
         lblimg3 = Label(image=self.photo_image3, bg="black", borderwidth=0)
@@ -90,7 +92,7 @@ class login_window:
 
     def login(self):
         if self.txtuser.get() == "" or self.txtpass.get() == "":
-            messagebox.showerror("Error!", "all Fields are required")
+            messagebox.showerror("Error!", "All fields are required")
         else:
             conn = mysql.connector.connect(
                 host="localhost", user="root", password="Legion@123", database="codewithme")
@@ -127,7 +129,8 @@ class login_window:
                 "Error", "Please enter the new password", parent=self.root2)
         else:
             conn = mysql.connector.connect(
-                host="localhost", user="root", password="Legion@123", database="codewithme")
+                # host="localhost", user="root", password="Legion@123", database="codewithme")
+                host="localhost", user="root", password="HELLOPUSPA@123", database="Login_&_Register")
             my_cursor = conn.cursor()
             query = (
                 "select * from register where email = %s and securityQ = %s and securityA = %s")
@@ -157,7 +160,8 @@ class login_window:
                 "Error", "Please enter the Email address to reset password")
         else:
             conn = mysql.connector.connect(
-                host="localhost", user="root", password="Legion@123", database="codewithme")
+                # host="localhost", user="root", password="Legion@123", database="codewithme")
+                host="localhost", user="root", password="HELLOPUSPA@123", database="Login_&_Register")
             my_cursor = conn.cursor()
             query = ("select * from register where email = %s")
             value = (self.txtuser.get(),)
@@ -228,12 +232,12 @@ class Register:
         self.var_confpass = StringVar()
 
         # =============bg image============
-        self.bg = ImageTk.PhotoImage(file=r"photos\images.png")
+        self.bg = ImageTk.PhotoImage(file=r"images\photos\images.png")
         bg_lbl = Label(self.root, image=self.bg)
         bg_lbl.place(x=0, y=0, relwidth=1, relheight=1)
 
         # =============left image============
-        self.bg1 = ImageTk.PhotoImage(file=r"photos\download (1).png")
+        self.bg1 = ImageTk.PhotoImage(file=r"images\photos\download (1).png")
         left_lbl = Label(self.root, image=self.bg1)
         left_lbl.place(x=50, y=100, width=470, height=550)
 
@@ -329,7 +333,7 @@ class Register:
 
         # ================buttons=================
 
-        img1 = Image.open(r"photos\llo.jfif")
+        img1 = Image.open(r"images\photos\llo.jfif")
         img1 = img1.resize((200, 45), Image.LANCZOS)
         self.photoimage1 = ImageTk.PhotoImage(img1)
         b1 = Button(frame, image=self.photoimage1, command=self.register_data,
@@ -354,7 +358,8 @@ class Register:
                 "Error", "Please Agree Our Terms and Conditions")
         else:
             conn = mysql.connector.connect(
-                host="localhost", user="root", password="Legion@123", database="codewithme")
+                # host="localhost", user="root", password="Legion@123", database="codewithme")
+                host="localhost", user="root", password="HELLOPUSPA@123", database="Login_&_Register")
             my_cursor = conn.cursor()
             query = ("select * from register where email=%s")
             value = (self.var_email.get(),)
@@ -386,7 +391,7 @@ class Face_Recognition_System:
         self.root.title("Face Recognition System")
 
         # bg image
-        img = Image.open(r"images\background.jpg")
+        img = Image.open(r"images\photos\background.jpg")
         img = img.resize((1366, 768), Image.LANCZOS)
         self.photoimg = ImageTk.PhotoImage(img)
 
@@ -398,7 +403,7 @@ class Face_Recognition_System:
         title_lbl.place(x=0, y=0, width=1366, height=40)
 
         # Student button
-        img1 = Image.open(r"images\student_details.png")
+        img1 = Image.open(r"images\photos\student_details.png")
         img1 = img1.resize((200, 200), Image.LANCZOS)
         self.photoimg1 = ImageTk.PhotoImage(img1)
 
@@ -411,7 +416,7 @@ class Face_Recognition_System:
         b1_1.place(x=100, y=450, width=200, height=40)
 
         # face detect
-        img2 = Image.open(r"images\faceid.png")
+        img2 = Image.open(r"images\photos\faceid.png")
         img2 = img2.resize((200, 200), Image.LANCZOS)
         self.photoimg2 = ImageTk.PhotoImage(img2)
 
@@ -424,7 +429,7 @@ class Face_Recognition_System:
         b2_1.place(x=400, y=450, width=200, height=40)
 
         # attendance
-        img3 = Image.open(r"images\attendance.png")
+        img3 = Image.open(r"images\photos\attendance.png")
         img3 = img3.resize((200, 200), Image.LANCZOS)
         self.photoimg3 = ImageTk.PhotoImage(img3)
 
@@ -437,7 +442,7 @@ class Face_Recognition_System:
         b3_1.place(x=700, y=450, width=200, height=40)
 
         # exit
-        img4 = Image.open(r"images\exit.png")
+        img4 = Image.open(r"images\photos\exit.png")
         img4 = img4.resize((200, 200), Image.LANCZOS)
         self.photoimg4 = ImageTk.PhotoImage(img4)
 

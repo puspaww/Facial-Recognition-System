@@ -24,12 +24,12 @@ class Register:
         self.var_confpass = StringVar()
 
         # =============bg image============
-        self.bg = ImageTk.PhotoImage(file=r"images\images.png")
+        self.bg = ImageTk.PhotoImage(file=r"images\photos\images.png")
         bg_lbl = Label(self.root, image=self.bg)
         bg_lbl.place(x=0, y=0, relwidth=1, relheight=1)
 
         # =============left image============
-        self.bg1 = ImageTk.PhotoImage(file=r"images\download (1).png")
+        self.bg1 = ImageTk.PhotoImage(file=r"images\photos\download (1).png")
         left_lbl = Label(self.root, image=self.bg1)
         left_lbl.place(x=50, y=100, width=470, height=550)
 
@@ -119,20 +119,20 @@ class Register:
 
         # ===============check buton==============
         self.var_check = IntVar()
-        checkbtn = Checkbutton(frame, variable=self.var_check, text="I agree the terms and conditions", font=(
+        checkbtn = Checkbutton(frame, variable=self.var_check, text="I agree the terms and conditions.", font=(
             "times new roman", 12, "bold"), bg="white", offvalue=0, onvalue=1)
         checkbtn.place(x=50, y=380)
 
         # ================buttons=================
 
-        img1 = Image.open(r"images\llo.jfif")
+        img1 = Image.open(r"images\photos\llo.jfif")
         img1 = img1.resize((200, 45), Image.LANCZOS)
         self.photoimage1 = ImageTk.PhotoImage(img1)
         b1 = Button(frame, image=self.photoimage1, command=self.register_data,
                     borderwidth=0, cursor="hand2", font=("times new roman", 15, "bold"), fg="white")
         b1.place(x=10, y=420, width=200)
 
-        img2 = Image.open(r"images\lol.jfif")
+        img2 = Image.open(r"images\photos\lol.jfif")
         img2 = img2.resize((200, 45), Image.LANCZOS)
         self.photoimage2 = ImageTk.PhotoImage(img2)
         b2 = Button(frame, image=self.photoimage2, borderwidth=0, cursor="hand2", font=(
@@ -150,7 +150,8 @@ class Register:
                 "Error", "Please Agree Our Terms and Conditions")
         else:
             conn = mysql.connector.connect(
-                host="localhost", user="root", password="Legion@123", database="codewithme")
+                # host="localhost", user="root", password="Legion@123", database="codewithme")
+                host="localhost", user="root", password="HELLOPUSPA@123", database="Login_&_Register")
             my_cursor = conn.cursor()
             query = ("select * from register where email=%s")
             value = (self.var_email.get(),)
