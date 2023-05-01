@@ -15,7 +15,8 @@ class Face_Recognition:
     def __init__(self, root):
         self.root = root
         self.root.geometry("1366x768+0+0")
-        self.root.title("Face Recognition System")
+        self.root.wm_iconbitmap("images\\icons\\faceid.ico")
+        self.root.title("Face Recognition")
 
         img_FD = Image.open(r"images\background.jpg")
         img_FD = img_FD.resize((1366, 768), Image.LANCZOS)

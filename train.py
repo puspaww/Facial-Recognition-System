@@ -12,7 +12,8 @@ class Train:
     def __init__(self, root):
         self.root = root
         self.root.geometry("1366x768+0+0")
-        self.root.title("Face Recognition System")
+        self.root.wm_iconbitmap("images\\icons\\data.ico")
+        self.root.title("Train Data")
 
         img_train = Image.open(r"images\background.jpg")
         img_train = img_train.resize((1366, 768), Image.LANCZOS)

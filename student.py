@@ -10,7 +10,9 @@ class Student:
     def __init__(self, root):
         self.root = root
         self.root.geometry("1366x768+0+0")
-        self.root.title("Face Recognition System")
+        self.root.wm_iconbitmap("images\\icons\\student_details.ico")
+        self.root.title("Student Details")
+
 
         ######## VARIABLES###########
         self.var_dep = StringVar()

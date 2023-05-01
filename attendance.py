@@ -19,7 +19,8 @@ class Attendance:
     def __init__(self, root):
         self.root = root
         self.root.geometry("1366x768+0+0")
-        self.root.title("Face Recognition System")
+        self.root.wm_iconbitmap("images\\icons\\attendance.ico")
+        self.root.title("Attendance")
 
         # variables
         self.var_id = StringVar()
@@ -37,7 +38,7 @@ class Attendance:
         bg_img = Label(self.root, image=self.photoimg)
         bg_img.place(x=0, y=0, width=1366, height=768)
 
-        title_lbl = Label(bg_img, text="Student's Management System", font=(
+        title_lbl = Label(bg_img, text="Attendance Management System", font=(
             "Comic Sans MS", 20, "bold"), bg="black", fg="white")
         title_lbl.place(x=0, y=0, width=1366, height=40)
 
