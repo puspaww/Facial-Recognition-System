@@ -23,6 +23,7 @@ class login_window:
         self.root = root
         self.root.title("Login")
         self.root.geometry("1530x790+0+0")
+        self.root.wm_iconbitmap("images\login.ico")
 
         self.bg = ImageTk.PhotoImage(file=r"images\photos\images.png")
 

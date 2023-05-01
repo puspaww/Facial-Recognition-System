@@ -65,21 +65,21 @@ class Face_Recognition_System:
             "Comic Sans MS", 16, "bold"), bg="black", fg="white")
         b3_1.place(x=700, y=450, width=200, height=40)
 
-        # exit
-        img4 = Image.open(r"images\exit.png")
+        # train data
+        img4 = Image.open(r"images\data.png")
         img4 = img4.resize((200, 200), Image.LANCZOS)
         self.photoimg4 = ImageTk.PhotoImage(img4)
 
         b4 = Button(bg_img, image=self.photoimg4,
-                    command=self.exit, cursor="hand2")
+                    command=self.train_data, cursor="hand2")
         b4.place(x=1000, y=250, width=200, height=200)
 
-        b4_1 = Button(bg_img, text="Exit", command=self.exit, cursor="hand2", font=(
+        b4_1 = Button(bg_img, text="Train data", command=self.train_data, cursor="hand2", font=(
             "Comic Sans MS", 16, "bold"), bg="black", fg="white")
         b4_1.place(x=1000, y=450, width=200, height=40)
 
-        # train data
-        b1_1 = Button(self.root, text="Train Data", command=self.train_data, cursor="hand2", font=(
+        # exit
+        b1_1 = Button(self.root, text="Exit", command=self.exit, cursor="hand2", font=(
             "Comic Sans MS", 16, "bold"), bg="black", fg="white")
         b1_1.place(x=550, y=550, width=200, height=40)
 
